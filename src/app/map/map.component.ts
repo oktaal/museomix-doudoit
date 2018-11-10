@@ -44,7 +44,6 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   showPosition(lat, lon) {
-    lat = 50.45615344, lon = 3.95258204;
     const x = this.transform(lon, lon1, lon2, x1, x2);
     const y = this.transform(lat, lat1, lat2, y1, y2);
     this.markerTop = `${y}px`;
