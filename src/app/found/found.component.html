@@ -7,10 +7,13 @@
       <div class="control">
         <label>
           Type the number printed on the sticker
-          <input class="input is-primary" type="number" placeholder="1234">
+          <input class="input is-primary" [(ngModel)]="value" type="number" (keyup)="check(false)" placeholder="1234">
         </label>
       </div>
     </div>
   </div>
-  <span class="button is-primary" (click)="check()">Check</span>
+  <div class="notification is-danger" *ngIf="showError">
+    That's not the right code, sorry.
+  </div>
+  <span class="button is-primary" (click)="check(true)">Check</span>
 </div>

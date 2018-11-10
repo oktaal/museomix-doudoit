@@ -7,7 +7,8 @@ const pois = [{
     title: "St Waudru's Collegiate Church",
     description: "The descent of the shrine of the Saint Waudru, the City’s patron, is an important ceremony in the church and marks the beginning of the Doudou festival. The Priest entrusts the relics of the saint to the Mayor so that they can be carried in procession through the streets of the city the next day.",
   },
-  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  key: 1234
 }, {
   instruction: "Go to the Grand Place",
   instructionMuseum: "Go to the Grand Place and find the dragon",
@@ -16,7 +17,8 @@ const pois = [{
     description: "At the Grand Place thousands of people have gathered around the sandy arena to see the fight between St George and the dragon. If you can snatch a horsehair form the tip of the dragon’s tail, it means good luck! After several attempts St George is able to combat the dragon.",
   },
   game: "dragonSearch",
-  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  key: 4321
 }, {
   instruction: "Find the dragon!",
   instructionMuseum: "Find the dragon!",
@@ -25,7 +27,8 @@ const pois = [{
     description: "Order has won from disorder. The city of Mons is safe! At least for a year…",
   },
   game: "dragonFight",
-  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  key: 1337
 }];
 
 /**
@@ -38,6 +41,6 @@ export class PoiService {
   constructor() { }
 
   async get(index: number) {
-    return pois[index];
+    return Object.assign({ total: pois.length }, pois[index]);
   }
 }

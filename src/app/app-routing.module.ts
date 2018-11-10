@@ -3,8 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { MapComponent } from './map/map.component';
 import { StartComponent } from './start/start.component';
 import { FoundComponent } from './found/found.component';
+import { ChallengeComponent } from './challenge/challenge.component';
+import { RewardComponent } from './reward/reward.component';
 
 const routes: Routes = [
+  {
+    path: 'start',
+    component: StartComponent
+  },
   {
     path: 'map/:index',
     component: MapComponent
@@ -14,10 +20,15 @@ const routes: Routes = [
     component: FoundComponent
   },
   {
-    path: 'start',
-    component: StartComponent
+    path: 'challenge/:index',
+    component: ChallengeComponent
   },
-  { path: '',
+  {
+    path: 'reward/:index',
+    component: RewardComponent
+  },
+  {
+    path: '',
     redirectTo: '/start',
     pathMatch: 'full'
   },];

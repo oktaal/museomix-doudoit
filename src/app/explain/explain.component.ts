@@ -7,6 +7,9 @@ import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 })
 export class ExplainComponent implements OnInit {
   @Input()
+  public continueText = "Continue";
+
+  @Input()
   public title: string;
 
   @Input()

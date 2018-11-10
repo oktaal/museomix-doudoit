@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PoiService } from '../poi.service';
 
 @Component({
@@ -8,18 +8,26 @@ import { PoiService } from '../poi.service';
   styleUrls: ['./found.component.scss']
 })
 export class FoundComponent implements OnInit {
+  private key: number;
+  private index: number;
 
-  constructor(activatedRoute: ActivatedRoute, poiService: PoiService) {
+  public value: number;
+  public showError = false;
+
+  constructor(private router: Router, activatedRoute: ActivatedRoute, poiService: PoiService) {
     activatedRoute.paramMap.subscribe(async map => {
-      const index = map.get('index');
-      const poi = await poiService.get(parseInt(index));
+      this.index = parseInt(map.get('index'));
+      this.key = (await poiService.get(this.index)).key;
     });
   }
 
   ngOnInit() {
   }
 
-  check() {
-
+  check(notify: boolean) {
+    if (this.value == this.key) {
+      this.router.navigate(['/challenge', this.index])
+    }
+    this.showError = notify;
   }
 }

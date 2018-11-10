@@ -1,3 +1,5 @@
-<p>
-  challenge works!
-</p>
+<ng-container [ngSwitch]="index">
+  <button (click)="finished()" *ngSwitchCase="0">Pretend the challenge was finished!</button>
+  <button (click)="finished()" *ngSwitchCase="1">Pretend the challenge was finished!</button>
+  <button (click)="finished()" *ngSwitchCase="2">Pretend the challenge was finished!</button>
+</ng-container>
