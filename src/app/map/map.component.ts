@@ -16,8 +16,8 @@ const lat1 = 50.46071613,
 })
 export class MapComponent implements OnInit, OnDestroy {
   private watchId: number;
-  private markerTop: string;
-  private markerLeft: string;
+  markerTop: string;
+  markerLeft: string;
 
   constructor() { }
 
