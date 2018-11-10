@@ -1,0 +1,11 @@
+$markerSize: 16px;
+.marker {
+    position: relative;
+    background: black;
+    margin-left: (-$markerSize/2);
+    margin-top: (-$markerSize/2);
+    display: block;
+    height: $markerSize;
+    width: $markerSize;
+    border-radius: $markerSize;
+}
