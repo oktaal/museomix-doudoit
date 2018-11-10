@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+:host {
+    font-family: 'Press Start 2P', cursive;
+    overflow: hidden;
+}
+
+.title {    
+    font-family: 'Press Start 2P', cursive;
+}
+.hidden {
+    visibility: hidden;
+}
+
+.dragon,
+.george {
+    display: block;
+    position: absolute;
+    width: 45vw;
+    height: 35vh;
+
+    .name {
+        padding: 20px;
+        border: double 4px black;
+        border-radius: 4px;
+        background: white;
+        display: inline-block;
+    }
+}
+
+.george {
+    top: 40vh;
+    left: 3px;
+    transition: left 1s ease-in;
+
+    .hidden & {
+        left: -1000px;
+    }
+}
+
+.dragon {
+    right: 3px;
+    transition: right 1s ease-in;
+    text-align: right;
+    
+    .hidden & {
+        right: -1000px;
+    }
+}
+
+.bottom {
+    padding: 20px;
+    border: double 4px black;
+    border-radius: 4px;
+    background: white;
+    width: calc(100% - 10px);
+    top: 75vh;
+    height: calc(25vh - 3px);
+    position: absolute;
+    box-sizing: border-box;
+    left: 3px;
+}

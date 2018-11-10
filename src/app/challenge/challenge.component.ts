@@ -13,6 +13,10 @@ export class ChallengeComponent implements OnInit {
   constructor(private router: Router, activatedRoute: ActivatedRoute, poiService: PoiService) {
     activatedRoute.paramMap.subscribe(async map => {
       this.index = parseInt(map.get('index'));
+      if (this.index < 2) {
+        // only have a dragon fight
+        this.finished();
+      }
     });
   }
 

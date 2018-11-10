@@ -10,6 +10,8 @@ import { ExplainComponent } from './explain/explain.component';
 import { FoundComponent } from './found/found.component';
 import { ChallengeComponent } from './challenge/challenge.component';
 import { RewardComponent } from './reward/reward.component';
+import { DragonComponent } from './dragon/dragon.component';
+import { HpComponent } from './hp/hp.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { RewardComponent } from './reward/reward.component';
     ExplainComponent,
     FoundComponent,
     ChallengeComponent,
-    RewardComponent
+    RewardComponent,
+    DragonComponent,
+    HpComponent
   ],
   imports: [
     BrowserModule,
