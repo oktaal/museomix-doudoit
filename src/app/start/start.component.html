@@ -1,6 +1,10 @@
 <ng-container *ngIf="!showExplain;else explain">
   <img class="dragon" src="assets/dragon-start.svg" alt="Dragon" />
-  <img class="logo" src="assets/logo.svg" alt="Dou do it" />
+  <div class="level">
+    <div class="level-item">
+      <img class="logo" src="assets/logo.svg" alt="Dou do it" />
+    </div>
+  </div>
   <div class="level">
     <div class="level-item">
       <a (click)="showExplain=true" class="button is-large is-primary">START</a>

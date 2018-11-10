@@ -1,14 +1,13 @@
-<div class="instruction notification">
-  <div class="level">
-    <div class="level-left">
+<div class="instruction">
+  <div class="container">
+    <h1 class="title">Can you find it!</h1>
+    <div class="content">
       <p>{{instruction}}</p>
     </div>
-    <div class="level-right">
-      <a class="button is-primary" [routerLink]="['/found', index]">Found it!</a>
-    </div>
   </div>
+  <a class="button is-primary" [routerLink]="['/found', index]">Got it!</a>
 </div>
 <svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 1607 1619" width="100vw" height="100vh" class="map">
-  <image href="assets/map-base.png" x="0" y="0" height="1619px" width="1607px" />
+  <image xlink:href="assets/map-base.png" x="0" y="0" height="1619" width="1607"></image>
   <circle *ngIf="showMarker" [attr.cx]="markerLeft" [attr.cy]="markerTop" r="16" class="marker" />
 </svg>
