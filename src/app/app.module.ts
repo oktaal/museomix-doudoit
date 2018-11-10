@@ -4,11 +4,21 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
+import { StartComponent } from './start/start.component';
+import { ExplainComponent } from './explain/explain.component';
+import { FoundComponent } from './found/found.component';
+import { ChallengeComponent } from './challenge/challenge.component';
+import { RewardComponent } from './reward/reward.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    StartComponent,
+    ExplainComponent,
+    FoundComponent,
+    ChallengeComponent,
+    RewardComponent
   ],
   imports: [
     BrowserModule,

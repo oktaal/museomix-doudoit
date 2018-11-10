@@ -1,13 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PoiService } from '../poi.service';
 
 const lat1 = 50.46071613,
   lat2 = 50.44598825,
   lon1 = 3.93962161,
   lon2 = 3.96116511,
-  y1 = 75,
-  y2 = 745,
-  x1 = 51,
-  x2 = 682;
+  y1 = 150,
+  y2 = 1489,
+  x1 = 102,
+  x2 = 1363;
 
 @Component({
   selector: 'dou-map',
@@ -16,10 +18,20 @@ const lat1 = 50.46071613,
 })
 export class MapComponent implements OnInit, OnDestroy {
   private watchId: number;
-  markerTop: string;
-  markerLeft: string;
+  index: number;
+  markerTop: number;
+  markerLeft: number;
+  showMarker = false;
+  instruction: string;
 
-  constructor() { }
+  constructor(activatedRoute: ActivatedRoute, poiService: PoiService) {
+    activatedRoute.paramMap.subscribe(async (map) => {
+      this.index = parseInt(map.get('index'));
+      const poi = await poiService.get(this.index);
+      // TODO: different instruction outside
+      this.instruction = poi.instructionMuseum;
+    })
+  }
 
   ngOnInit() {
     const options = {
@@ -46,12 +58,13 @@ export class MapComponent implements OnInit, OnDestroy {
   showPosition(lat, lon) {
     const x = this.transform(lon, lon1, lon2, x1, x2);
     const y = this.transform(lat, lat1, lat2, y1, y2);
-    this.markerTop = `${y}px`;
-    this.markerLeft = `${x}px`;
+    this.markerTop = y;
+    this.markerLeft = x;
   }
 
   handlePosition(pos: Position) {
     const crd = pos.coords;
     this.showPosition(crd.latitude, crd.longitude);
+    this.showMarker = true;
   }
 }

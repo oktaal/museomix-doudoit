@@ -1,0 +1,18 @@
+<ng-container *ngIf="!showExplain;else explain">
+  <img class="dragon" src="assets/dragon-start.svg" alt="Dragon" />
+  <img class="logo" src="assets/logo.svg" alt="Dou do it" />
+  <div class="level">
+    <div class="level-item">
+      <a (click)="showExplain=true" class="button is-large is-primary">START</a>
+    </div>
+  </div>
+</ng-container>
+<ng-template #explain>
+  <dou-explain title="What is DOUDOU?" (continue)="start()">
+    <p>The Ducasse de Mons or Doudou is a popular festival that happens every year in the city of Mons. With origins in
+      the Middle Ages, every year it brings together thousands of participants in the city. In 2005 it was recognized
+      by UNESCO as an example of the Intangible Heritage of Humanity. Doudou is the highpoint of the year for the city
+      of Mons!</p>
+    <p>Through the ‘Dou do it’ exploration, you can relive the magic of Doudou!</p>
+  </dou-explain>
+</ng-template>

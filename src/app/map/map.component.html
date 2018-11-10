@@ -1,4 +1,14 @@
-<div>
-  <div class="marker" [style.left]="markerLeft" [style.top]="markerTop"></div>
-  <img src="assets/map-base.png" />
+<div class="instruction notification">
+  <div class="level">
+    <div class="level-left">
+      <p>{{instruction}}</p>
+    </div>
+    <div class="level-right">
+      <a class="button is-primary" [routerLink]="['/found', index]">Found it!</a>
+    </div>
+  </div>
 </div>
+<svg preserveAspectRatio="xMidYMid slice" viewBox="0 0 1607 1619" width="100vw" height="100vh" class="map">
+  <image href="assets/map-base.png" x="0" y="0" height="1619px" width="1607px" />
+  <circle *ngIf="showMarker" [attr.cx]="markerLeft" [attr.cy]="markerTop" r="16" class="marker" />
+</svg>
