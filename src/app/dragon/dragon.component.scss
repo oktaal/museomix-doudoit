@@ -8,7 +8,8 @@
     cursor: pointer;
 }
 
-.title {    
+.title,
+.button {
     font-family: 'Press Start 2P', cursive;
     font-size: 2.5vh;
 }
@@ -56,6 +57,40 @@
 
     .picture {
         background-image: url(~/assets/george.png);
+        transition: margin-left 0.3s ease;
+
+        &.left {
+            background-image: url(~/assets/george-left.png);
+            margin-left:-3vw;
+        }
+        &.surprised {
+            background-image: url(~/assets/george-surprised.png);
+        }
+        &.pistol {
+            background-image: url(~/assets/george-pistol.png);
+        }
+        &.pistol-attack {
+            background-image: url(~/assets/george-pistol-attack.png);
+            animation: shake 0.41s cubic-bezier(.36,.07,.19,.97) both infinite;
+        }
+        &.spear {
+            background-image: url(~/assets/george-spear.png);
+        }
+        &.spear-attack {
+            background-image: url(~/assets/george-spear-attack.png);
+        }
+        &.sword {
+            background-image: url(~/assets/george-sword.png);
+        }
+        &.sword-attack {
+            background-image: url(~/assets/george-sword-attack.png);
+        }
+        &.won {
+            background-image: url(~/assets/george-won.png);
+        }
+        &.won-left {
+            background-image: url(~/assets/george-won-left.png);
+        }
     }
 }
 
@@ -123,9 +158,21 @@
     z-index: -1;
 
     content: url(~/assets/dragon-mouthopen.png),
+        url(~/assets/dragon-mouthclosed.png),
         url(~/assets/dragon-fireattack.png),
         url(~/assets/dragon-shoutattack.png),
-        url(~/assets/dragon-windattack.png);
+        url(~/assets/dragon-windattack.png),
+        url(~/assets/george.png),
+        url(~/assets/george-left.png),
+        url(~/assets/george-surprised.png),
+        url(~/assets/george-pistol.png),
+        url(~/assets/george-pistol-attack.png),
+        url(~/assets/george-spear.png),
+        url(~/assets/george-spear-attack.png),
+        url(~/assets/george-sword.png),
+        url(~/assets/george-sword-attack.png),
+        url(~/assets/george-won.png),
+        url(~/assets/george-won-left.png);
 }
 
 @keyframes shake {

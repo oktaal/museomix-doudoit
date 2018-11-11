@@ -1,13 +1,14 @@
-import { Component, EventEmitter, OnInit, Output, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, NgZone, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
 type DragonAttack = 'fire' | 'shout' | 'wind';
+type GeorgeAttack = 'spear' | 'sword' | 'pistol';
 @Component({
   selector: 'dou-dragon',
   templateUrl: './dragon.component.html',
   styleUrls: ['./dragon.component.scss']
 })
-export class DragonComponent implements OnInit {
-  dragonHp = 1000;
+export class DragonComponent implements OnInit, OnDestroy {
+  dragonHp = 9999;
   georgeHp = 100;
 
   /**
@@ -21,9 +22,14 @@ export class DragonComponent implements OnInit {
   typingMessage: string;
   weaponsUsed = {};
 
-  actions: { message: string, attack?: DragonAttack, dragonHp?: number }[] = [{
+  actions: {
+    message: string,
+    dragonAttacks?: DragonAttack,
+    dragonHp?: number,
+    georgeAttacks?: GeorgeAttack
+  }[] = [{
     message: "DRAGON uses Fire Attack!",
-    attack: 'fire'
+    dragonAttacks: 'fire'
   }, {
     message: "It missed!"
   }, {
@@ -37,11 +43,33 @@ export class DragonComponent implements OnInit {
   dragonWind = false;
   dragonKO = false;
 
+  // George actions
+  georgeSurprised = false;
+  georgeLeft = false;
+  georgePistol = false;
+  georgePistolAttack = false;
+  georgeSpear = false;
+  georgeSpearAttack = false;
+  georgeSword = false;
+  georgeSwordAttack = false;
+  georgeWon = false;
+  georgeWonLeft = false;
+
+  winInterval: any;
+
+  private oldBodyOverflow: string;
+
   @Output()
   public finished = new EventEmitter();
 
   @ViewChild('audio')
   public audio: ElementRef<HTMLAudioElement>;
+
+  @ViewChild('pistolAudio')
+  public pistolAudio: ElementRef<HTMLAudioElement>;
+
+  @ViewChild('applause')
+  public applause: ElementRef<HTMLAudioElement>;
 
   constructor(private ngZone: NgZone) {
     setInterval(() => {
@@ -54,10 +82,17 @@ export class DragonComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.oldBodyOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const audio = this.audio.nativeElement;
     if (audio) {
       audio.play();
     }
+  }
+
+  ngOnDestroy() {
+    document.body.style.overflow = this.oldBodyOverflow;
+    clearInterval(this.winInterval);
   }
 
   bringItOn() {
@@ -70,16 +105,18 @@ export class DragonComponent implements OnInit {
     setTimeout(() => {
       this.ngZone.run(() => {
         this.dragonMouthOpen = true;
+        this.georgeSurprised = true;
       })
     }, 1100);
     setTimeout(() => {
       this.ngZone.run(() => {
         this.dragonMouthOpen = false;
+        this.georgeSurprised = false;
       })
     }, 1550);
   }
 
-  attack(weapon: 'spear' | 'sword' | 'pistol') {
+  attack(weapon: GeorgeAttack) {
     switch (weapon) {
       case 'spear':
         if (this.weaponsUsed['spear']) {
@@ -89,6 +126,7 @@ export class DragonComponent implements OnInit {
           this.weaponsUsed['spear'] = true;
           this.planGeorgeAttack(
             "ST.GEORGE uses SPEAR attack!",
+            'spear',
             "It was not very effective...",
             5);
           this.planDragonAttack('DRAGON uses FIRE ATTACK', 'fire', 'It was just a candle...');
@@ -102,9 +140,10 @@ export class DragonComponent implements OnInit {
           this.weaponsUsed['sword'] = true;
           this.planGeorgeAttack(
             "ST.GEORGE uses SWORD attack!",
+            'sword',
             "It was not very effective...",
             10);
-            this.planDragonAttack('DRAGON uses TORNADO ATTACK', 'wind', 'It missed!');
+          this.planDragonAttack('DRAGON uses TORNADO ATTACK', 'wind', 'It missed!');
         } else {
           this.planMessage('Ah, where is my sword again?');
           this.planDragonAttack('DRAGON uses WIND ATTACK', 'wind', 'It was just a breeze...');
@@ -114,6 +153,7 @@ export class DragonComponent implements OnInit {
         if (this.weaponsUsed['sword'] && this.weaponsUsed['spear']) {
           this.planGeorgeAttack(
             "ST.GEORGE uses PISTOL attack!",
+            'pistol',
             "It was super effective!",
             99999);
         } else {
@@ -136,13 +176,29 @@ export class DragonComponent implements OnInit {
       return;
     }
     if (action.dragonHp) {
+      this.animateGeorgeAttack(action.georgeAttacks);
       this.dragonHp += action.dragonHp;
       this.ngZone.run(() => {
         if (this.dragonHp < 0) {
-          this.dragonKO = true;
+          setTimeout(() => {
+            this.ngZone.run(() => {
+              this.dragonKO = true
+            });
+          }, 400);
+          setTimeout(() => {
+            this.ngZone.run(() => {
+              this.georgeWon = true;
+            });
+            this.winInterval = setInterval(() => {
+              this.ngZone.run(() => {
+                this.georgeWon = !this.georgeWon;
+                this.georgeWonLeft = !this.georgeWonLeft;
+              })
+            }, 400);
+          }, 800);
           const audio = this.audio.nativeElement;
           if (audio) {
-            audio.play();
+            audio.pause();
           }
         }
         this.dragonAttacked = true;
@@ -155,7 +211,7 @@ export class DragonComponent implements OnInit {
       }, 1000);
     } else if (action.message) {
       this.setMessage(action.message);
-      switch (action.attack) {
+      switch (action.dragonAttacks) {
         case 'fire':
           this.dragonFire = true;
           break;
@@ -166,8 +222,9 @@ export class DragonComponent implements OnInit {
           this.dragonWind = true;
           break;
       }
-      if (action.attack) {
+      if (action.dragonAttacks) {
         this.georgeAttacked = true;
+        this.animateGeorgeEvade();
         setTimeout(() => {
           this.ngZone.run(() => {
             this.dragonShout = this.dragonFire = this.dragonWind = false;
@@ -181,6 +238,60 @@ export class DragonComponent implements OnInit {
     }
   }
 
+  private animateGeorgeAttack(attack: GeorgeAttack) {
+    switch (attack) {
+      case 'spear':
+        this.georgeSpear = true;
+        this.ngTimeout(() => {
+          this.georgeSpear = false;
+          this.georgeSpearAttack = true;
+        }, 300);
+        this.ngTimeout(() => {
+          this.georgeSpearAttack = false;
+        }, 1000);
+        break;
+      case 'sword':
+        this.georgeSword = true;
+        this.ngTimeout(() => {
+          this.georgeSword = false;
+          this.georgeSwordAttack = true;
+        }, 300);
+        this.ngTimeout(() => {
+          this.georgeSwordAttack = false;
+        }, 1000);
+        break;
+      case 'pistol':
+        this.georgePistol = true;
+        const pistolAudio = this.pistolAudio.nativeElement;
+        if (pistolAudio) {
+          pistolAudio.play();
+        }
+        this.ngTimeout(() => {
+          this.georgePistol = false;
+          this.georgePistolAttack = true;
+        }, 300);
+        this.ngTimeout(() => {
+          this.georgePistolAttack = false;
+          const applause = this.applause.nativeElement;
+          if (applause) {
+            applause.play();
+          }
+        }, 1000);
+        break;
+    }
+  }
+
+  private animateGeorgeEvade() {
+    this.georgeSurprised = true;
+    this.ngTimeout(() => {
+      this.georgeSurprised = false;
+      this.georgeLeft = true;
+    }, 300);
+    this.ngTimeout(() => {
+      this.georgeLeft = false;
+    }, 1000);
+  }
+
   setMessage(message: string) {
     this.message = message + " >";
     this.typingMessage = message.substr(0, 1);
@@ -192,12 +303,13 @@ export class DragonComponent implements OnInit {
     });
   }
 
-  planGeorgeAttack(message: string, resultMessage: string, hp: number) {
+  planGeorgeAttack(message: string, attack: GeorgeAttack, resultMessage: string, hp: number) {
     this.actions.push({
       message
     });
     this.actions.push({
       message: '',
+      georgeAttacks: attack,
       dragonHp: -hp
     });
     this.actions.push({
@@ -208,9 +320,13 @@ export class DragonComponent implements OnInit {
   planDragonAttack(message: string, attack: DragonAttack, dissapointment: string) {
     this.actions.push({
       message,
-      attack
+      dragonAttacks: attack
     }, {
         message: dissapointment
       });
+  }
+
+  private ngTimeout(callback: () => void, ms: number) {
+    setTimeout(() => { this.ngZone.run(callback) }, ms);
   }
 }

@@ -26,7 +26,18 @@
   </div>
   <div class="george">
     <dou-hp [hp]="georgeHp"></dou-hp>
-    <div class="picture"></div>
+    <div class="picture"[ngClass]="{
+      'surprised': georgeSurprised,
+      'left': georgeLeft,
+      'pistol': georgePistol,
+      'pistol-attack': georgePistolAttack,
+      'spear': georgeSpear,
+      'spear-attack': georgeSpearAttack,
+      'sword': georgeSword,
+      'sword-attack': georgeSwordAttack,
+      'won': georgeWon,
+      'won-left': georgeWonLeft
+    }"></div>
     <span class="name">ST.GEORGE</span>
   </div>
   <div class="bottom" *ngIf="message" (click)="nextAction()" role="button">
@@ -43,6 +54,12 @@
     </div>
   </div>
 </div>
-<audio preload #audio>
+<audio preload loop #audio>
   <source src="assets/doudou.mp3" type="audio/mpeg">
+</audio>
+<audio preload #pistolAudio>
+  <source src="assets/pistol.mp3" type="audio/mpeg">
+</audio>
+<audio preload #applause>
+  <source src="assets/applause.mp3" type="audio/mpeg">
 </audio>
