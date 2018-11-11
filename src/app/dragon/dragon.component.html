@@ -3,10 +3,13 @@
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
+          Et là dragon apparaît !
+        </h1>
+        <h1 class="title">
           Suddenly a DRAGON appears!
         </h1>
         <p>
-          <button (click)="bringItOn()" class="button is-large">Oh no!</button>
+          <button (click)="bringItOn()" class="button is-large">Oh noon ! Oh no!</button>
         </p>
       </div>
     </div>
@@ -26,7 +29,7 @@
   </div>
   <div class="george">
     <dou-hp [hp]="georgeHp"></dou-hp>
-    <div class="picture"[ngClass]="{
+    <div class="picture" [ngClass]="{
       'surprised': georgeSurprised,
       'left': georgeLeft,
       'pistol': georgePistol,

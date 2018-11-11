@@ -14,7 +14,7 @@ const pois = [{
   instructionMuseum: "Go to the Grand Place and find the dragon",
   explain: {
     title: "Grand Place",
-    description: "At the Grand Place thousands of people have gathered around the sandy arena to see the fight between St George and the dragon. If you can snatch a horsehair form the tip of the dragon’s tail, it means good luck! After several attempts St George is able to combat the dragon.",
+    description: "At the Grand Place thousands of people have gathered around the sandy arena to see the fight between St George and the dragon. If you can snatch a horsehair form the tip of the dragon’s tail, it means good luck!",
   },
   game: "dragonSearch",
   video: "assets/extrait2.mp4",
@@ -24,7 +24,7 @@ const pois = [{
   instructionMuseum: "Find the dragon!",
   explain: {
     title: "You won!",
-    description: "<p>Order has won from disorder. The city of Mons is safe!</p><p>At least for a year…</p>",
+    description: "<p>After several attempts St George was able to combat the dragon.</p><p>Order has won from disorder. The city of Mons is safe!</p><p>At least for a year…</p>",
   },
   game: "dragonFight",
   video: "assets/extrait1.mp4",

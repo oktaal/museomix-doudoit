@@ -13,7 +13,13 @@ export class ExplainComponent implements OnInit {
   public title: string;
 
   @Input()
+  public titleFr: string;
+
+  @Input()
   public description: string;
+
+  @Input()
+  public descriptionFr: string;
 
   @Input()
   public video: string;
