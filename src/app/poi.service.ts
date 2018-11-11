@@ -27,7 +27,7 @@ const pois = [{
     description: "<p>Order has won from disorder. The city of Mons is safe!</p><p>At least for a year…</p>",
   },
   game: "dragonFight",
-  video: undefined,
+  video: "assets/extrait1.mp4",
   key: 1970
 }];
 

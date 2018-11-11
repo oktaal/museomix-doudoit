@@ -88,6 +88,15 @@ export class DragonComponent implements OnInit, OnDestroy {
     if (audio) {
       audio.play();
     }
+    const applause = this.applause.nativeElement;
+    const pistolAudio = this.pistolAudio.nativeElement;
+    // trigger download
+    applause.play();
+    pistolAudio.play();
+    setTimeout(() => {
+      applause.pause();
+      pistolAudio.pause();
+    }, 0);
   }
 
   ngOnDestroy() {
