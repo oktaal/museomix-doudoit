@@ -8,7 +8,7 @@ const pois = [{
     description: "The descent of the shrine of the Saint Waudru, the City’s patron, is an important ceremony in the church and marks the beginning of the Doudou festival. The Priest entrusts the relics of the saint to the Mayor so that they can be carried in procession through the streets of the city the next day.",
   },
   video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  key: 1234
+  key: 1349
 }, {
   instruction: "Go to the Grand Place",
   instructionMuseum: "Go to the Grand Place and find the dragon",
@@ -18,7 +18,7 @@ const pois = [{
   },
   game: "dragonSearch",
   video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  key: 4321
+  key: 2005
 }, {
   instruction: "Find the dragon!",
   instructionMuseum: "Find the dragon!",
@@ -28,7 +28,7 @@ const pois = [{
   },
   game: "dragonFight",
   video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  key: 1337
+  key: 1970
 }];
 
 /**
