@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, NgZone, ViewChild, ElementRef } from '@angular/core';
 
+type DragonAttack = 'fire' | 'shout' | 'wind';
 @Component({
   selector: 'dou-dragon',
   templateUrl: './dragon.component.html',
@@ -12,19 +13,29 @@ export class DragonComponent implements OnInit {
   /**
    * Fight animation!
    */
-  isAttack = false;
+  dragonAttacked = false;
+  georgeAttacked = false;
+
   start = true;
   message: string;
   typingMessage: string;
   weaponsUsed = {};
 
-  actions: { message: string, dragonHp?: number }[] = [{
-    message: "DRAGON uses Fire Attack!"
+  actions: { message: string, attack?: DragonAttack, dragonHp?: number }[] = [{
+    message: "DRAGON uses Fire Attack!",
+    attack: 'fire'
   }, {
     message: "It missed!"
   }, {
     message: null
   }];
+
+  // dragon actions
+  dragonMouthOpen = false;
+  dragonFire = false;
+  dragonShout = false;
+  dragonWind = false;
+  dragonKO = false;
 
   @Output()
   public finished = new EventEmitter();
@@ -56,28 +67,38 @@ export class DragonComponent implements OnInit {
     if (audio) {
       audio.play();
     }
+    setTimeout(() => {
+      this.ngZone.run(() => {
+        this.dragonMouthOpen = true;
+      })
+    }, 1100);
+    setTimeout(() => {
+      this.ngZone.run(() => {
+        this.dragonMouthOpen = false;
+      })
+    }, 1550);
   }
 
-  attack(weapon: 'spike' | 'sword' | 'pistol') {
+  attack(weapon: 'spear' | 'sword' | 'pistol') {
     switch (weapon) {
-      case 'spike':
-        if (this.weaponsUsed['spike']) {
+      case 'spear':
+        if (this.weaponsUsed['spear']) {
           this.planMessage('Come on, not again!');
-          this.planDragonAttack('DRAGON uses EARTH ATTACK', 'It was just a tremble...');
+          this.planDragonAttack('DRAGON uses EARTH ATTACK', 'shout', 'It was just a tremble...');
         } else {
-          this.weaponsUsed['spike'] = true;
+          this.weaponsUsed['spear'] = true;
           this.planGeorgeAttack(
-            "ST.GEORGE uses SPIKE attack!",
+            "ST.GEORGE uses SPEAR attack!",
             "It was not very effective...",
             5);
-          this.planDragonAttack('DRAGON uses FIRE ATTACK', 'It was just a candle...');
+          this.planDragonAttack('DRAGON uses FIRE ATTACK', 'fire', 'It was just a candle...');
         }
         break;
       case 'sword':
         if (this.weaponsUsed['sword']) {
           this.planMessage('The sword needs a rest!');
-          this.planDragonAttack('DRAGON uses SHOUT ATTACK', 'It was just a whisper...');
-        } else if (this.weaponsUsed['spike']) {
+          this.planDragonAttack('DRAGON uses SHOUT ATTACK', 'shout', 'It was just a whisper...');
+        } else if (this.weaponsUsed['spear']) {
           this.weaponsUsed['sword'] = true;
           this.planGeorgeAttack(
             "ST.GEORGE uses SWORD attack!",
@@ -85,18 +106,18 @@ export class DragonComponent implements OnInit {
             10);
         } else {
           this.planMessage('Ah, where is my sword again?');
-          this.planDragonAttack('DRAGON uses WIND ATTACK', 'It was just a breeze...');
+          this.planDragonAttack('DRAGON uses WIND ATTACK', 'wind', 'It was just a breeze...');
         }
         break;
       case 'pistol':
-        if (this.weaponsUsed['sword'] && this.weaponsUsed['spike']) {
+        if (this.weaponsUsed['sword'] && this.weaponsUsed['spear']) {
           this.planGeorgeAttack(
             "ST.GEORGE uses PISTOL attack!",
             "It was super effective!",
-            99999)
+            99999);
         } else {
           this.planMessage('The gun isn\'t loaded yet!');
-          this.planDragonAttack('DRAGON uses SCREAM ATTACK', 'It was just a talk...');
+          this.planDragonAttack('DRAGON uses SCREAM ATTACK', 'shout', 'It was just a talk...');
         }
         break;
     }
@@ -104,25 +125,51 @@ export class DragonComponent implements OnInit {
   }
 
   nextAction() {
-    if (this.isAttack) { return }
+    if (this.dragonAttacked || this.georgeAttacked) { return }
     const action = this.actions.shift();
     if (!action) {
+      if (this.dragonKO) {
+        this.finished.next();
+      }
       this.message = undefined;
       return;
     }
     if (action.dragonHp) {
       this.dragonHp += action.dragonHp;
       this.ngZone.run(() => {
-        this.isAttack = true;
+        if (this.dragonHp < 0) {
+          this.dragonKO = true;
+        }
+        this.dragonAttacked = true;
       });
       setTimeout(() => {
         this.ngZone.run(() => {
-          this.isAttack = false;
+          this.dragonAttacked = false;
           this.nextAction();
         });
       }, 1000);
     } else if (action.message) {
       this.setMessage(action.message);
+      switch (action.attack) {
+        case 'fire':
+          this.dragonFire = true;
+          break;
+        case 'shout':
+          this.dragonShout = true;
+          break;
+        case 'wind':
+          this.dragonWind = true;
+          break;
+      }
+      if (action.attack) {
+        this.georgeAttacked = true;
+        setTimeout(() => {
+          this.ngZone.run(() => {
+            this.dragonShout = this.dragonFire = this.dragonWind = false;
+            this.georgeAttacked = false;
+          });
+        }, 2000);
+      }
     } else {
       this.message = undefined;
       return;
@@ -153,9 +200,10 @@ export class DragonComponent implements OnInit {
     });
   }
 
-  planDragonAttack(message: string, dissapointment: string) {
+  planDragonAttack(message: string, attack: DragonAttack, dissapointment: string) {
     this.actions.push({
-      message
+      message,
+      attack
     }, {
         message: dissapointment
       });

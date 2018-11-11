@@ -12,13 +12,21 @@
     </div>
   </section>
 </div>
-<div [ngClass]="{'hidden':start}">
-  <div class="dragon" [ngClass]="{'attacked':isAttack}">
+<div class="battlefield" [ngClass]="{'hidden':start}">
+  <div class="dragon" [ngClass]="{'attacked':dragonAttacked,'attacking':georgeAttacked}">
     <dou-hp [hp]="dragonHp"></dou-hp>
+    <div class="picture" [ngClass]="{
+      'mouth-open': dragonMouthOpen,
+      'fire': dragonFire,
+      'shout': dragonShout,
+      'wind': dragonWind,
+      'ko': dragonKO
+    }"></div>
     <span class="name">DRAGON</span>
   </div>
   <div class="george">
     <dou-hp [hp]="georgeHp"></dou-hp>
+    <div class="picture"></div>
     <span class="name">ST.GEORGE</span>
   </div>
   <div class="bottom" *ngIf="message" (click)="nextAction()" role="button">
@@ -28,7 +36,7 @@
     <div class="attacks">
       <p>Choose your weapon</p>
       <div class="level">
-        <div class="weapon" role="button" (click)="attack('spike')">&gt; Spike</div>
+        <div class="weapon" role="button" (click)="attack('spear')">&gt; Spear</div>
         <div class="weapon" role="button" (click)="attack('sword')">&gt; Sword</div>
         <div class="weapon" role="button" (click)="attack('pistol')">&gt; Pistol</div>
       </div>
