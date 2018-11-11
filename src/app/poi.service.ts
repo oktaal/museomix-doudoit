@@ -24,7 +24,7 @@ const pois = [{
   instructionMuseum: "Find the dragon!",
   explain: {
     title: "You won!",
-    description: "Order has won from disorder. The city of Mons is safe! At least for a year…",
+    description: "<p>Order has won from disorder. The city of Mons is safe!</p><p>At least for a year…</p>",
   },
   game: "dragonFight",
   video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
