@@ -16,7 +16,7 @@
     visibility: hidden;
 }
 .battlefield {
-    background: navajowhite;
+    background: lightblue;
     height: 100vh;
 }
 
@@ -39,6 +39,9 @@
         display: block;
         height: 30vh;
         width: 45vw;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 }
 
@@ -49,6 +52,10 @@
 
     .hidden & {
         left: -1000px;
+    }
+
+    .picture {
+        background-image: url(~/assets/george.png);
     }
 }
 
@@ -75,9 +82,6 @@
 
     .picture {
         background-image: url(~/assets/dragon-mouthclosed.png);
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
 
         &.mouth-open,
         &.ko {

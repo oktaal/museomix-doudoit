@@ -104,6 +104,7 @@ export class DragonComponent implements OnInit {
             "ST.GEORGE uses SWORD attack!",
             "It was not very effective...",
             10);
+            this.planDragonAttack('DRAGON uses TORNADO ATTACK', 'wind', 'It missed!');
         } else {
           this.planMessage('Ah, where is my sword again?');
           this.planDragonAttack('DRAGON uses WIND ATTACK', 'wind', 'It was just a breeze...');
@@ -139,6 +140,10 @@ export class DragonComponent implements OnInit {
       this.ngZone.run(() => {
         if (this.dragonHp < 0) {
           this.dragonKO = true;
+          const audio = this.audio.nativeElement;
+          if (audio) {
+            audio.play();
+          }
         }
         this.dragonAttacked = true;
       });
