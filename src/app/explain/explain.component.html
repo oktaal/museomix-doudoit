@@ -1,12 +1,10 @@
-<div class="section">
+<div class="section container">
   <h1 class="title">
     {{title}}
   </h1>
-  <div class="container">
-    <div class="content" *ngIf="description" [innerHtml]="description"></div>
-    <div class="content" *ngIf="!description">
-      <ng-content></ng-content>
-    </div>
+  <div class="content" *ngIf="description" [innerHtml]="description"></div>
+  <div class="content" *ngIf="!description">
+    <ng-content></ng-content>
   </div>
   <span class="button is-primary" (click)="continue.next()">{{continueText}}</span>
 </div>

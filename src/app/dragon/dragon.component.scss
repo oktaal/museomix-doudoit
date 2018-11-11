@@ -1,11 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
 :host {
     font-family: 'Press Start 2P', cursive;
+    font-size: 2.5vh;
     overflow: hidden;
+}
+
+[role="button"]{
+    cursor: pointer;
 }
 
 .title {    
     font-family: 'Press Start 2P', cursive;
+    font-size: 2.5vh;
 }
 .hidden {
     visibility: hidden;
@@ -19,17 +25,17 @@
     height: 35vh;
 
     .name {
-        padding: 20px;
-        border: double 4px black;
-        border-radius: 4px;
+        padding: 1vw;
+        border: double 2vw black;
+        border-radius: 2vw;
         background: white;
         display: inline-block;
     }
 }
 
 .george {
-    top: 40vh;
-    left: 3px;
+    top: 35vh;
+    left: 1vw;
     transition: left 1s ease-in;
 
     .hidden & {
@@ -38,24 +44,56 @@
 }
 
 .dragon {
-    right: 3px;
+    right: 1vw;
     transition: right 1s ease-in;
     text-align: right;
     
     .hidden & {
         right: -1000px;
     }
+
+    &.attacked {
+        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+        transform: translate3d(0, 0, 0);
+        backface-visibility: hidden;
+        perspective: 1000px;
+    }
 }
 
-.bottom {
-    padding: 20px;
-    border: double 4px black;
-    border-radius: 4px;
+.bottom {   
+    padding: 3vw;
+    border: double 2vw black;
+    border-radius: 2vw;
     background: white;
-    width: calc(100% - 10px);
-    top: 75vh;
-    height: calc(25vh - 3px);
+    width: 97vw;
+    bottom: 1vh;
+    height: 23vh;
     position: absolute;
     box-sizing: border-box;
-    left: 3px;
+    left: 1vw;
 }
+
+.typing {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100vw;
+    letter-spacing: .1vw;
+}
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }

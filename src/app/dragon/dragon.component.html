@@ -1,9 +1,9 @@
-<div class="container" *ngIf="start">
+<div *ngIf="start">
   <section class="hero is-primary">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Suddenly a dragon appears!
+          Suddenly a DRAGON appears!
         </h1>
         <p>
           <button (click)="bringItOn()" class="button is-large">Oh no!</button>
@@ -12,8 +12,8 @@
     </div>
   </section>
 </div>
-<div class="container" [ngClass]="{'hidden':start}">
-  <div class="dragon">
+<div [ngClass]="{'hidden':start}">
+  <div class="dragon" [ngClass]="{'attacked':isAttack}">
     <dou-hp [hp]="dragonHp"></dou-hp>
     <span class="name">DRAGON</span>
   </div>
@@ -21,15 +21,22 @@
     <dou-hp [hp]="georgeHp"></dou-hp>
     <span class="name">ST.GEORGE</span>
   </div>
-  <div class="bottom">
-    <div class="message" *ngIf="message">{{message}}</div>
-    <div class="attacks" *ngIf="!message">
+  <div class="bottom" *ngIf="message" (click)="nextAction()" role="button">
+    <p class="typing">
+      {{typingMessage}}
+    </p>
+  </div>
+  <div class="bottom" *ngIf="!message">
+    <div class="attacks">
       <p>Choose your weapon</p>
       <div class="level">
-        <div class="weapon" (click)="attack('spike')">&gt; Spike</div>
-        <div class="weapon" (click)="attack('sword')">&gt; Sword</div>
-        <div class="weapon" (click)="attack('pistol')">&gt; Pistol</div>
+        <div class="weapon" role="button" (click)="attack('spike')">&gt; Spike</div>
+        <div class="weapon" role="button" (click)="attack('sword')">&gt; Sword</div>
+        <div class="weapon" role="button" (click)="attack('pistol')">&gt; Pistol</div>
       </div>
     </div>
   </div>
 </div>
+<audio #audio>
+  <source src="assets/doudou.mp3" type="audio/mpeg">
+</audio>
