@@ -15,6 +15,9 @@ export class ExplainComponent implements OnInit {
   @Input()
   public description: string;
 
+  @Input()
+  public video: string;
+  
   @Output()
   public continue = new EventEmitter();
 

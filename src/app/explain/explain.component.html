@@ -2,6 +2,9 @@
   <h1 class="title">
     {{title}}
   </h1>
+  <video preload autoplay controls *ngIf="video">
+    <source src="{{video}}" type="video/mp4">
+  </video>
   <div class="content" *ngIf="description" [innerHtml]="description"></div>
   <div class="content" *ngIf="!description">
     <ng-content></ng-content>

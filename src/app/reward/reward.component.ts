@@ -11,6 +11,7 @@ export class RewardComponent implements OnInit {
   public index: number;
   public continueText = "Continue";
   public gameFinished = false;
+  public video: string;
   public title: string;
   public description: string;
 
@@ -21,6 +22,7 @@ export class RewardComponent implements OnInit {
       this.title = poi.explain.title;
       this.description = poi.explain.description;
       this.gameFinished = this.index == poi.total - 1;
+      this.video = poi.video;
       this.continueText = !this.gameFinished ? "Continue" : "Start over";
     });
   }

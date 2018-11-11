@@ -7,7 +7,7 @@ const pois = [{
     title: "St Waudru's Collegiate Church",
     description: "The descent of the shrine of the Saint Waudru, the City’s patron, is an important ceremony in the church and marks the beginning of the Doudou festival. The Priest entrusts the relics of the saint to the Mayor so that they can be carried in procession through the streets of the city the next day.",
   },
-  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  video: "assets/extrait3.mp4",
   key: 1349
 }, {
   instruction: "Go to the Grand Place",
@@ -17,7 +17,7 @@ const pois = [{
     description: "At the Grand Place thousands of people have gathered around the sandy arena to see the fight between St George and the dragon. If you can snatch a horsehair form the tip of the dragon’s tail, it means good luck! After several attempts St George is able to combat the dragon.",
   },
   game: "dragonSearch",
-  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  video: "assets/extrait2.mp4",
   key: 2005
 }, {
   instruction: "Find the dragon!",
@@ -27,7 +27,7 @@ const pois = [{
     description: "<p>Order has won from disorder. The city of Mons is safe!</p><p>At least for a year…</p>",
   },
   game: "dragonFight",
-  video: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+  video: undefined,
   key: 1970
 }];
 
