@@ -22,9 +22,7 @@
     <span class="name">ST.GEORGE</span>
   </div>
   <div class="bottom" *ngIf="message" (click)="nextAction()" role="button">
-    <p class="typing">
-      {{typingMessage}}
-    </p>
+    {{typingMessage}}
   </div>
   <div class="bottom" *ngIf="!message">
     <div class="attacks">
@@ -37,6 +35,6 @@
     </div>
   </div>
 </div>
-<audio #audio>
+<audio preload #audio>
   <source src="assets/doudou.mp3" type="audio/mpeg">
 </audio>

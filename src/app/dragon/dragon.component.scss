@@ -73,13 +73,6 @@
     left: 1vw;
 }
 
-.typing {
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100vw;
-    letter-spacing: .1vw;
-}
-
 @keyframes shake {
     10%, 90% {
       transform: translate3d(-1px, 0, 0);
