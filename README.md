@@ -1,4 +1,8 @@
-# MuseomixDoudoit
+# Museomix Mons, 2018: Dou do it!
+
+The idea was to have an interactive guide allowing people to experience the annual Doudou event themselves at any moment. This is done by retracing the same route as the Doudou event and showing information and videos at the points of interests along the way. The experience also includes a mini-game.
+
+Created by the Team 'Teamporary' at the [Museomix event](http://museomix.be/) in Mons, Belgium (November 9-11, 2018).
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
 

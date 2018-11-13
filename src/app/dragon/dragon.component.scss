@@ -1,198 +1,207 @@
 @import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
 :host {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 2.5vh;
-    overflow: hidden;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5vh;
+  overflow: hidden;
 }
-[role="button"]{
-    cursor: pointer;
+
+[role="button"] {
+  cursor: pointer;
 }
 
 .title,
 .button {
-    font-family: 'Press Start 2P', cursive;
-    font-size: 2.5vh;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 2.5vh;
 }
+
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
+
 .battlefield {
-    background: lightblue;
-    height: 100vh;
+  background: lightblue;
+  height: 100vh;
 }
 
 .dragon,
 .george {
-    display: block;
-    position: absolute;
-    width: 45vw;
-    height: 35vh;
+  display: block;
+  position: absolute;
+  width: 45vw;
+  height: 40vh;
 
-    .name {
-        padding: 1vw;
-        border: double 2vw black;
-        border-radius: 2vw;
-        background: white;
-        display: inline-block;
-    }
-
-    .picture {
-        display: block;
-        height: 30vh;
-        width: 45vw;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
-    }
-}
-
-.george {
-    top: 35vh;
-    left: 1vw;
-    transition: left 1s ease-in;
-
-    .hidden & {
-        left: -1000px;
-    }
-
-    .picture {
-        background-image: url(~/assets/george.png);
-        transition: margin-left 0.3s ease;
-
-        &.left {
-            background-image: url(~/assets/george-left.png);
-            margin-left:-3vw;
-        }
-        &.surprised {
-            background-image: url(~/assets/george-surprised.png);
-        }
-        &.pistol {
-            background-image: url(~/assets/george-pistol.png);
-        }
-        &.pistol-attack {
-            background-image: url(~/assets/george-pistol-attack.png);
-            animation: shake 0.41s cubic-bezier(.36,.07,.19,.97) both infinite;
-        }
-        &.spear {
-            background-image: url(~/assets/george-spear.png);
-        }
-        &.spear-attack {
-            background-image: url(~/assets/george-spear-attack.png);
-        }
-        &.sword {
-            background-image: url(~/assets/george-sword.png);
-        }
-        &.sword-attack {
-            background-image: url(~/assets/george-sword-attack.png);
-        }
-        &.won {
-            background-image: url(~/assets/george-won.png);
-        }
-        &.won-left {
-            background-image: url(~/assets/george-won-left.png);
-        }
-    }
-}
-
-.dragon {
-    right: 1vw;
-    transition: right 1s ease-in;
-    text-align: right;
-    
-    .hidden & {
-        right: -1000px;
-    }
-
-    &.attacked,
-    &.attacking {
-        animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-        transform: translate3d(0, 0, 0);
-        backface-visibility: hidden;
-        perspective: 1000px;
-    }
-
-    &.attacked .picture {
-        background-image: url(~/assets/dragon-mouthopen.png);
-    }
-
-    .picture {
-        background-image: url(~/assets/dragon-mouthclosed.png);
-
-        &.mouth-open,
-        &.ko {
-            background-image: url(~/assets/dragon-mouthopen.png);
-        }
-        &.fire {
-            background-image: url(~/assets/dragon-fireattack.png);
-        }
-        &.shout {
-            background-image: url(~/assets/dragon-shoutattack.png);
-        }
-        &.wind {
-            background-image: url(~/assets/dragon-windattack.png);
-        }
-        &.ko {
-            animation: spin 4s linear infinite;
-            filter: grayscale(100%)
-        }
-    }
-}
-
-.bottom {   
-    padding: 3vw;
+  .name {
+    padding: 1vw;
     border: double 2vw black;
     border-radius: 2vw;
     background: white;
-    width: 97vw;
-    bottom: 1vh;
-    height: 23vh;
-    position: absolute;
-    box-sizing: border-box;
-    left: 1vw;
-}
-.bottom::after {
-    position: absolute;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    z-index: -1;
+    display: inline-block;
+  }
 
-    content: url(~/assets/dragon-mouthopen.png),
-        url(~/assets/dragon-mouthclosed.png),
-        url(~/assets/dragon-fireattack.png),
-        url(~/assets/dragon-shoutattack.png),
-        url(~/assets/dragon-windattack.png),
-        url(~/assets/george.png),
-        url(~/assets/george-left.png),
-        url(~/assets/george-surprised.png),
-        url(~/assets/george-pistol.png),
-        url(~/assets/george-pistol-attack.png),
-        url(~/assets/george-spear.png),
-        url(~/assets/george-spear-attack.png),
-        url(~/assets/george-sword.png),
-        url(~/assets/george-sword-attack.png),
-        url(~/assets/george-won.png),
-        url(~/assets/george-won-left.png);
+  .picture {
+    display: block;
+    height: 30vh;
+    width: 45vw;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+
+.george {
+  bottom: 26vh;
+  left: 1vw;
+  transition: left 1s ease-in;
+
+  .hidden & {
+    left: -1000px;
+  }
+
+  .picture {
+    background-image: url(~/assets/george.png);
+    transition: margin-left 0.3s ease;
+
+    &.left {
+      background-image: url(~/assets/george-left.png);
+      margin-left: -3vw;
+    }
+
+    &.surprised {
+      background-image: url(~/assets/george-surprised.png);
+    }
+
+    &.pistol {
+      background-image: url(~/assets/george-pistol.png);
+    }
+
+    &.pistol-attack {
+      background-image: url(~/assets/george-pistol-attack.png);
+      animation: shake 0.41s cubic-bezier(.36, .07, .19, .97) both infinite;
+    }
+
+    &.spear {
+      background-image: url(~/assets/george-spear.png);
+    }
+
+    &.spear-attack {
+      background-image: url(~/assets/george-spear-attack.png);
+    }
+
+    &.sword {
+      background-image: url(~/assets/george-sword.png);
+    }
+
+    &.sword-attack {
+      background-image: url(~/assets/george-sword-attack.png);
+    }
+
+    &.won {
+      background-image: url(~/assets/george-won.png);
+    }
+
+    &.won-left {
+      background-image: url(~/assets/george-won-left.png);
+    }
+  }
+}
+
+.dragon {
+  right: 1vw;
+  transition: right 1s ease-in;
+  text-align: right;
+
+  .hidden & {
+    right: -1000px;
+  }
+
+  &.attacked,
+  &.attacking {
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  &.attacked .picture {
+    background-image: url(~/assets/dragon-mouthopen.png);
+  }
+
+  .picture {
+    background-image: url(~/assets/dragon-mouthclosed.png);
+
+    &.mouth-open,
+    &.ko {
+      background-image: url(~/assets/dragon-mouthopen.png);
+    }
+
+    &.fire {
+      background-image: url(~/assets/dragon-fireattack.png);
+    }
+
+    &.shout {
+      background-image: url(~/assets/dragon-shoutattack.png);
+    }
+
+    &.wind {
+      background-image: url(~/assets/dragon-windattack.png);
+    }
+
+    &.ko {
+      animation: spin 4s linear infinite;
+      filter: grayscale(100%)
+    }
+  }
+}
+
+.bottom {
+  padding: 3vw;
+  border: double 2vw black;
+  border-radius: 2vw;
+  background: white;
+  width: 97vw;
+  bottom: 1vh;
+  height: 23vh;
+  position: absolute;
+  box-sizing: border-box;
+  left: 1vw;
+}
+
+.preload-images {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
 }
 
 @keyframes shake {
-    10%, 90% {
-      transform: translate3d(-1px, 0, 0);
-    }
-    
-    20%, 80% {
-      transform: translate3d(2px, 0, 0);
-    }
-  
-    30%, 50%, 70% {
-      transform: translate3d(-4px, 0, 0);
-    }
-  
-    40%, 60% {
-      transform: translate3d(4px, 0, 0);
-    }
+
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
   }
 
-@keyframes spin { 100% {
-    transform: rotate(360deg); 
-} } 
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
